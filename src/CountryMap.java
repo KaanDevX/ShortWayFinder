@@ -33,10 +33,7 @@ public class CountryMap {
                 citynames = reader.nextLine();
 
                 citynamearr = new String[numofcity];
-                for (int i = 0;i<numofcity;i++){
-                    citynamearr = citynames.split(" ");
-                    //System.out.println("Route " + (i + 1) + ": " + routeandtime[i]);//
-                }
+                citynamearr = citynames.split(" ");
 
 
                 routes = reader.nextLine();

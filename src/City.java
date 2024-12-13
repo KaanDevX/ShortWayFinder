@@ -1,9 +1,11 @@
 public class City {
     public static void main(String[] args){
         CountryMap data = new CountryMap();
-        WayFinder calculate = new WayFinder();
         data.fileread();
+
+        WayFinder calculate = new WayFinder(data);
         System.out.println(data.citynamearr[0] +data.routecity1[0] );
-        System.out.println(calculate.checkcityandroutes());
+        calculate.yazdir();
+        System.out.println(calculate.checkroutes());
     }
 }

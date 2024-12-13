@@ -1,18 +1,30 @@
 public class WayFinder {
-    public boolean checkcityandroutes(){
-        CountryMap data = new CountryMap();
-        for(int i = 0; i<data.numofcity;i++){
-            int existcities = 0;
-            for (int a = 0; a< data.numofroutes;a++){
-                if(data.citynamearr[i].equals(data.routecity1[a])){
-                    existcities += 1;
-                    i += 1 ;
-                    if(existcities == (data.numofroutes-1)){
-                        return true;
-                    }
+    private CountryMap data; // CountryMap'i bağlamak için
+
+    public WayFinder(CountryMap data) {
+        this.data = data;
+    }
+
+    public void yazdir() {
+        System.out.println(data.citynamearr[1]);
+    }
+
+    public boolean checkroutes() {
+        boolean[] result = new boolean[data.numofroutes];
+        boolean netresult = true;
+
+        for (int i = 0; i < (data.numofroutes); i++) {
+            result[i] = false;
+            for (int a = 0; a < (data.numofcity-1); a++) {
+                if (data.routecity1[i].equals(data.citynamearr[a])) {
+                    result[i] = true;
                 }
             }
+
+            if (result[i] == false) {
+                netresult = false;
+            }
         }
-        return false;
+        return netresult;
     }
 }
