@@ -14,6 +14,7 @@ public class CountryMap {
     public String[] routecity2;
     public String[] time;
     public String target;
+    public int[] intTime;
 
     public void fileread(){
         try{
@@ -60,6 +61,7 @@ public class CountryMap {
                 routecity1 = new String[numofroutes];
                 routecity2 = new String[numofroutes];
                 time = new String[numofroutes];
+                intTime = new int[time.length];
 
                 for(int i = 0;i<numofroutes;i++){
                     routecity1[i] = routeandtime[i].trim().substring(0,1);
@@ -67,8 +69,15 @@ public class CountryMap {
                     //System.out.println("1. city route " + routecity1[i]);//
                 }
 
+                for(int d = 0; d<numofroutes;d++){
+                    time[d] = routeandtime[d].trim().substring(4,6);
+                    intTime[d] = Integer.parseInt(time[d]);
+                }
+
+
+
                 // Target hedeflediğimiz bölgenin adıdır. Örnek olarak A dan E ye gitmek istiyorsak, E targettır. Bunu yol bulmada check() fonksiyonu için kullanıcaz//
-                target = reader.nextLine();
+                target = reader.nextLine().trim().substring(2,3);
                 System.out.println("\nThe file has been read. If you got an error do what it says\n");
             }
             reader.close();

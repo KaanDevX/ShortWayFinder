@@ -4,14 +4,12 @@ public class City {
         data.fileread();
 
         WayFinder calculate = new WayFinder(data);
-        System.out.println(calculate.checkfirstcolumncities());
-        System.out.println(calculate.checksecondcolumncities());
-        System.out.println(calculate.allcheck());
-        if(calculate.allcheck()){
-            System.out.println("Cities and routes checked");
-        }
-        else{
-            System.out.println("There is/are a city that doesn't fit with route");
-        }
+       if(calculate.checkfirstcolumncities() && calculate.checksecondcolumncities()){
+           System.out.println("Cities and routes checked");
+           calculate.ShortestWay();
+       }
+       else{
+           System.out.println("There exist a problem while checking cities and routes. Please check your file and fix it");
+       }
     }
 }
