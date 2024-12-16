@@ -1,15 +1,24 @@
+import java.util.Scanner;
+
 public class City {
     public static void main(String[] args){
-        CountryMap abc = new CountryMap();
-        abc.fileread();
+        CountryMap data = new CountryMap();
+        Scanner sc = new Scanner(System.in);
+        String filename;
+        System.out.println("Enter file name");
+        filename = sc.nextLine();
 
-        WayFinder calculate = new WayFinder(abc);
+        data.fileread(filename+".txt");
+
+        WayFinder calculate = new WayFinder(data);
        if(calculate.allcheck()){
            System.out.println("Cities and routes checked");
+           System.out.println(data.start + " " + data.target);
            calculate.ShortestWay();
        }
        else{
-           System.out.println("There exist a problem while checking cities and routes. Please check your file and fix it");
+           System.out.println("cities and routes don't fit, fix your file.");
+           System.exit(7);
        }
     }
 }

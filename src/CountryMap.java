@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.nio.file.Paths;
 
 public class CountryMap {
+
     public String numberofcity;
     public int numofcity;
     public String citynames;
@@ -18,9 +19,9 @@ public class CountryMap {
     public String target;
     public int[] intTime;
 
-    public void fileread(){
+    public void fileread(String textname){
         try{
-            Scanner reader = new Scanner(Paths.get("map1.txt"));
+            Scanner reader = new Scanner(Paths.get(textname));
             while(reader.hasNextLine()){
 
                 //şehir sayımızı string olarak okuyup integera dönüştürüyoruz.//
@@ -60,6 +61,7 @@ public class CountryMap {
                     //System.out.println("Route " + (i + 1) + ": " + routeandtime[i]);//
                 }
 
+
                 routecity1 = new String[numofroutes];
                 routecity2 = new String[numofroutes];
                 time = new String[numofroutes];
@@ -72,7 +74,7 @@ public class CountryMap {
                 }
 
                 for(int d = 0; d<numofroutes;d++){
-                    time[d] = routeandtime[d].trim().substring(4,6);
+                    time[d] = routeandtime[d].trim().substring(4);
                     intTime[d] = Integer.parseInt(time[d]);
                 }
 
@@ -80,15 +82,30 @@ public class CountryMap {
 
                 // Target hedeflediğimiz bölgenin adıdır. Örnek olarak A dan E ye gitmek istiyorsak, E targettır. Bunu yol bulmada check() fonksiyonu için kullanıcaz//
                 startandtarget= reader.nextLine().trim();
-                start = startandtarget.substring(0,1);
-                target = startandtarget.substring(2,3);
 
+
+                try {
+                    start = startandtarget.substring(0,1);
+                }
+                catch (Exception b){
+                    System.out.println("start point not entered properly");
+                    System.exit(1);
+                }
+
+                try{
+                    target = startandtarget.substring(2,3);
+                }
+                catch (Exception c){
+                    System.out.println("end point not entered properly");
+                    System.exit(2);
+                }
                 System.out.println("\nThe file has been read. If you got an error do what it says\n");
             }
             reader.close();
         }
         catch (IOException e){
             System.out.println("File couldn't read");
+            System.exit(3);
         }
     }
 }
