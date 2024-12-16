@@ -1,10 +1,10 @@
 public class City {
     public static void main(String[] args){
-        CountryMap data = new CountryMap();
-        data.fileread();
+        CountryMap abc = new CountryMap();
+        abc.fileread();
 
-        WayFinder calculate = new WayFinder(data);
-       if(calculate.checkfirstcolumncities() && calculate.checksecondcolumncities()){
+        WayFinder calculate = new WayFinder(abc);
+       if(calculate.allcheck()){
            System.out.println("Cities and routes checked");
            calculate.ShortestWay();
        }

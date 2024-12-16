@@ -13,6 +13,8 @@ public class CountryMap {
     public String[] routecity1;
     public String[] routecity2;
     public String[] time;
+    public String startandtarget;
+    public String start;
     public String target;
     public int[] intTime;
 
@@ -77,7 +79,10 @@ public class CountryMap {
 
 
                 // Target hedeflediğimiz bölgenin adıdır. Örnek olarak A dan E ye gitmek istiyorsak, E targettır. Bunu yol bulmada check() fonksiyonu için kullanıcaz//
-                target = reader.nextLine().trim().substring(2,3);
+                startandtarget= reader.nextLine().trim();
+                start = startandtarget.substring(0,1);
+                target = startandtarget.substring(2,3);
+
                 System.out.println("\nThe file has been read. If you got an error do what it says\n");
             }
             reader.close();
