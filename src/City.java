@@ -13,8 +13,7 @@ public class City {
         WayFinder calculate = new WayFinder(data);
        if(calculate.allcheck()){
            System.out.println("Cities and routes checked");
-           System.out.println(data.start + " " + data.target);
-           calculate.ShortestWay();
+           System.out.println(calculate.findTheTime(0,1));
        }
        else{
            System.out.println("cities and routes don't fit, fix your file.");

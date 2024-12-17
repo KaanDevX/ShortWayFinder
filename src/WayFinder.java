@@ -1,5 +1,6 @@
 public class WayFinder {
     private CountryMap data; // CountryMap'i bağlamak için
+    PathResult result = new PathResult();
 
     public WayFinder(CountryMap data) {
         this.data = data;
@@ -89,16 +90,12 @@ public class WayFinder {
         }
     }
 
-
     public void ShortestWay() {
-        int startIndex = 0;
-        int targetIndex = 2;
 
         // Yoları tutmak için
         boolean[] visited = new boolean[data.numofcity];
-        String currentPath = data.start;
-        int currentTime = 0;
-        PathResult result = new PathResult();
+        String currentway = data.start;
+        int currenttime = 0;
 
 
         // Sonuçlar
@@ -110,5 +107,31 @@ public class WayFinder {
         }
     }
 
-    //recoursive ile tüm yolları denettirmem lazım
+    //dijkstra algoritması ile yol bulmak için
+    public void findWays(String current, String target,String currentway,int currenttime,boolean[] visited){
+        //eğer rotasyonun sonuna geldiyse ve önceki veriden zamanı azsa kaydedicek
+        if (current.equals(target)) {
+            if(currenttime<result.getTotalTime()){
+                result.setTotalTime(currenttime);
+                result.setPath(currentway);
+            }
+        }
+        //recoursive ile tüm yolları denettirmem lazım findTheTimthodunu bir şekilde kullanmam lazım
+
+    }
+
+    //Yollar arasındaki bağlantıyı bulmak için böylece süreyi eşleştirebiliriz.
+    public int findTheTime(int city1, int city2){
+        for (int i = 0; i < data.numofroutes; i++) {
+            if ((data.routecity1[i].equals(data.citynamearr[city1]) && data.routecity2[i].equals(data.citynamearr[city2]))) {
+                return data.intTime[i];
+            }
+        }
+        return 5;
+    }
+
+
+
+
+
 }
