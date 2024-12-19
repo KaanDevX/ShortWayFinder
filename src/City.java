@@ -11,13 +11,14 @@ public class City {
         data.fileread(filename+".txt");
 
         WayFinder calculate = new WayFinder(data);
-       if(calculate.allcheck()){
-           System.out.println("Cities and routes checked");
-           System.out.println(calculate.findTheTime(0,1));
-       }
-       else{
-           System.out.println("cities and routes don't fit, fix your file.");
-           System.exit(7);
-       }
+        if(calculate.allcheck()){
+            System.out.println("Cities and routes checked");
+            calculate.ShortestWay();
+        }
+        else{
+            System.out.println("There exist a problem while checking cities and routes. Please check your file and fix it");
+        }
+
+        //wayfinder sonucunu text file yazdır
     }
 }
