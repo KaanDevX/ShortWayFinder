@@ -5,7 +5,7 @@ public class WayFinder {
         this.data = data;
     }
 
-    public boolean checkstart(){
+    public boolean checkStart(){
         boolean[] result = new boolean[data.numofroutes];
         boolean netresult = true;
 
@@ -24,7 +24,7 @@ public class WayFinder {
         return netresult;
     }
 
-    public boolean checktarget(){
+    public boolean checkTarget(){
         boolean[] result = new boolean[data.numofroutes];
         boolean netresult = true;
 
@@ -43,7 +43,7 @@ public class WayFinder {
         return netresult;
     }
 
-    public boolean checkfirstcolumncities() {
+    public boolean checkFirstColumnCities() {
         boolean[] result = new boolean[data.numofroutes];
         boolean netresult = true;
 
@@ -62,7 +62,7 @@ public class WayFinder {
         return netresult;
     }
 
-    public boolean checksecondcolumncities() {
+    public boolean checkSecondColumnCities() {
         boolean[] result = new boolean[data.numofroutes];
         boolean netresult = true;
 
@@ -81,15 +81,15 @@ public class WayFinder {
         return netresult;
     }
 
-    public boolean allcheck() {
-        if (checkfirstcolumncities() && checksecondcolumncities() && checkstart() && checktarget()) {
+    public boolean allCheck() {
+        if (checkFirstColumnCities() && checkSecondColumnCities() && checkStart() && checkTarget()) {
             return true;
         } else {
             return false;
         }
     }
 
-    public void ShortestWay() {
+    public void shortestWay() {
         int startIndex = findCity(data.start);
         int targetIndex = findCity(data.target);
 
@@ -99,6 +99,7 @@ public class WayFinder {
 
         findWays(startIndex, targetIndex, visited, currentWay, currentTime);
 
+        //Sonuç
         if (result.getTotalTime() == Integer.MAX_VALUE) {
             System.out.println("No route exists from " + data.start + " to " + data.target);
         } else {
@@ -109,6 +110,7 @@ public class WayFinder {
 
     //tüm yolları denemek için
     private void findWays(int current, int target, boolean[] visited, String currentway, int currentTime) {
+
         if (current == target) {
             if (currentTime < result.getTotalTime()) {
                 result.setPath(currentway);
@@ -121,19 +123,21 @@ public class WayFinder {
         for (int i = 0; i < data.numofcity; i++) {
             int zaman = findTime(current, i);
             if (!visited[i] && zaman != Integer.MAX_VALUE) {
-                //findways sürekli tekrar döndürmem lazım
+                findWays(i, target, visited, currentway + " -> " + data.citynamearr[i], currentTime + zaman);
             }
         }
+        visited[current] = false;
     }
 
-    //iki yol arasnda zamanı bulmak için
+    //iki yol arasnda zamanı bulmak için ve komşu olup olmadığını bulmak için
     private int findTime(int city1, int city2) {
         for (int i = 0; i < data.numofroutes; i++) {
-            if ((data.routecity1[i].equals(data.citynamearr[city1]) && data.routecity2[i].equals(data.citynamearr[city2]))){
+            if ((data.routecity1[i].equals(data.citynamearr[city1]) && data.routecity2[i].equals(data.citynamearr[city2])) ||
+                    (data.routecity2[i].equals(data.citynamearr[city1]) && data.routecity1[i].equals(data.citynamearr[city2]))) {
                 return data.intTime[i];
             }
         }
-        return Integer.MAX_VALUE;//eğer sonsuz değerse komşu değildir.
+        return Integer.MAX_VALUE;
     }
 
     //başlangıç noktası ve son noktaya integer değer vermek için

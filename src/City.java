@@ -1,24 +1,46 @@
 import java.util.Scanner;
+import java.util.Formatter;
+import java.io.IOException;
+import java.io.FileWriter;
 
 public class City {
-    public static void main(String[] args){
-        CountryMap data = new CountryMap();
-        Scanner sc = new Scanner(System.in);
-        String filename;
-        System.out.println("Enter file name");
-        filename = sc.nextLine();
+    public static void main(String[] args) {
+        if (args.length != 1) {
+            System.out.println("Error: give defined file name");
+            System.exit(1);
+        }
 
-        data.fileread(filename+".txt");
+        String filename = args[0];
+
+        CountryMap data = new CountryMap();
+        Art textart = new Art();
+
+        data.fileRead(filename + ".txt");
 
         WayFinder calculate = new WayFinder(data);
-        if(calculate.allcheck()){
+        if (calculate.allCheck()) {
             System.out.println("Cities and routes checked");
-            calculate.ShortestWay();
-        }
-        else{
-            System.out.println("There exist a problem while checking cities and routes. Please check your file and fix it");
-        }
+            calculate.shortestWay();
 
-        //wayfinder sonucunu text file yazdır
+            PathResult lastresult = calculate.result;
+
+            Formatter f = null;
+            try {
+                f = new Formatter("output.txt");
+                f.format("Fastest Way: %s\n", lastresult.getPath());
+                f.format("Total Time: %d min\n", lastresult.getTotalTime());
+                f.format("%s", textart.textart);
+            } catch (IOException e) {
+                System.out.println("Something went wrong");
+                System.exit(32);
+            } finally {
+                if (f != null) {
+                    f.close();
+                }
+            }
+        } else {
+            System.out.println("There exist a problem while checking cities and routes. Please check your file and fix it");
+            System.exit(42);
+        }
     }
 }

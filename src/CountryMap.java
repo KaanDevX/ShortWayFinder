@@ -19,21 +19,23 @@ public class CountryMap {
     public String target;
     public int[] intTime;
 
-    public void fileread(String textname){
+    public void fileRead(String textname){
+        Scanner reader = null;
         try{
-            Scanner reader = new Scanner(Paths.get(textname));
+            reader = new Scanner(Paths.get(textname));
             while(reader.hasNextLine()){
 
                 //şehir sayımızı string olarak okuyup integera dönüştürüyoruz.//
-                numberofcity =reader.nextLine();
+                numberofcity = reader.nextLine();
                 try {
                     numofcity = Integer.parseInt(numberofcity);
                 }
                 catch (NumberFormatException e){
                     System.out.println("----------------------------------------------");
-                    System.out.println("|Error: Number error while getting city number!");
+                    System.out.println("Line 29|Error: Number error while getting city number!");
                     System.out.println("|Fix your text file and put number for city");
                     System.out.println("----------------------------------------------");
+                    System.exit(32);
                 }
 
                 //şehirlerin isimlerini alıyoruz//
@@ -49,9 +51,10 @@ public class CountryMap {
                 }
                 catch (NumberFormatException a){
                     System.out.println("---------------------------------------------------");
-                    System.out.println("|Error: Number error while getting city number!");
+                    System.out.println("Line 48|Error: Number error while getting city number!");
                     System.out.println("|Fix your text file and put number for route number");
                     System.out.println("---------------------------------------------------");
+                    System.exit(56);
                 }
 
                 routeandtime = new String[numofroutes];
@@ -88,24 +91,29 @@ public class CountryMap {
                     start = startandtarget.substring(0,1);
                 }
                 catch (Exception b){
-                    System.out.println("start point not entered properly");
-                    System.exit(1);
+                    System.out.println("Line 90 Error|Start point not entered properly");
+                    System.exit(94);
                 }
 
                 try{
                     target = startandtarget.substring(2,3);
                 }
                 catch (Exception c){
-                    System.out.println("end point not entered properly");
-                    System.exit(2);
+                    System.out.println("Line 98 Error|End point not entered properly");
+                    System.exit(102);
                 }
-                System.out.println("\nThe file has been read. If you got an error do what it says\n");
             }
-            reader.close();
         }
         catch (IOException e){
             System.out.println("File couldn't read");
             System.exit(3);
+        }
+        finally{
+            if(reader != null){
+            reader.close();
+            System.out.println("\nThe file has been read.\n");
+        }
+
         }
     }
 }
