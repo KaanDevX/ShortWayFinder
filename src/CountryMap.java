@@ -32,7 +32,7 @@ public class CountryMap {
                 }
                 catch (NumberFormatException e){
                     System.out.println("----------------------------------------------");
-                    System.out.println("Line 29|Error: Number error while getting city number!");
+                    System.out.println("Line 30|Error: Number error while getting city number!");
                     System.out.println("|Fix your text file and put number for city");
                     System.out.println("----------------------------------------------");
                     System.exit(32);
@@ -44,31 +44,39 @@ public class CountryMap {
                 citynamearr = new String[numofcity];
                 citynamearr = citynames.split(" ");
 
+                if(citynamearr.length != numofcity){
+                    System.out.println("---------------------------------------------------");
+                    System.out.println("Line 47|Error: The city number is not as many as the number of city names!");
+                    System.out.println("|Enter correct city number on your text file");
+                    System.out.println("---------------------------------------------------");
+                    System.exit(52);
+                }
+
 
                 routes = reader.nextLine();
                 try {
-                    numofroutes = Integer.parseInt(routes);
+                    numofroutes = Integer.parseInt(routes); //String'i integera dönüştürüyoruz
                 }
-                catch (NumberFormatException a){
+                catch (NumberFormatException e){
                     System.out.println("---------------------------------------------------");
-                    System.out.println("Line 48|Error: Number error while getting city number!");
+                    System.out.println("Line 57|Error: Number error while getting city number!");
                     System.out.println("|Fix your text file and put number for route number");
                     System.out.println("---------------------------------------------------");
-                    System.exit(56);
+                    System.exit(65);
                 }
 
                 routeandtime = new String[numofroutes];
 
-                for (int i = 0;i<numofroutes;i++){
-                    routeandtime[i] = reader.nextLine().trim().toUpperCase();
+                for (int i = 0;i<numofroutes;i++){ //rotasyon ve zamanları satır şeklinde bir arraye alıyoruz//
+                    routeandtime[i] = reader.nextLine().trim().toUpperCase(); //trim ve uppercase olası hataları baştan çözüyor.//
                     //System.out.println("Route " + (i + 1) + ": " + routeandtime[i]);//
                 }
 
 
-                routecity1 = new String[numofroutes];
-                routecity2 = new String[numofroutes];
-                time = new String[numofroutes];
-                intTime = new int[time.length];
+                routecity1 = new String[numofroutes]; //Text dosyasındaki 1. sütünu almak için
+                routecity2 = new String[numofroutes]; //Text dosyasındaki 2. sütünu almak için
+                time = new String[numofroutes]; //Text dosyasındaki 3. sütünu almak için
+                intTime = new int[time.length]; // String'i integera dönüştürmede kullanıcaz
 
                 for(int i = 0;i<numofroutes;i++){
                     routecity1[i] = routeandtime[i].trim().substring(0,1);
@@ -78,7 +86,23 @@ public class CountryMap {
 
                 for(int d = 0; d<numofroutes;d++){
                     time[d] = routeandtime[d].trim().substring(4);
-                    intTime[d] = Integer.parseInt(time[d]);
+                    try{
+                        intTime[d] = Integer.parseInt(time[d]);
+                        if (intTime[d]<=0){
+                            System.out.println("---------------------------------------------------");
+                            System.out.println("Line 91|Error: Time must be greater than 0!");
+                            System.out.println("|Fix your text file and put a number that greater number than 0");
+                            System.out.println("---------------------------------------------------");
+                            System.exit(96);
+                        }
+                    }
+                    catch (NumberFormatException e){
+                        System.out.println("----------------------------------------------");
+                        System.out.println("Line 89|Error: Number error while getting time!");
+                        System.out.println("|Fix your text file and put number for time");
+                        System.out.println("----------------------------------------------");
+                        System.exit(89);
+                    }
                 }
 
 
@@ -91,7 +115,7 @@ public class CountryMap {
                     start = startandtarget.substring(0,1);
                 }
                 catch (Exception b){
-                    System.out.println("Line 90 Error|Start point not entered properly");
+                    System.out.println("Line 107 Error|Start point not entered properly");
                     System.exit(94);
                 }
 
@@ -99,7 +123,7 @@ public class CountryMap {
                     target = startandtarget.substring(2,3);
                 }
                 catch (Exception c){
-                    System.out.println("Line 98 Error|End point not entered properly");
+                    System.out.println("Line 115 Error|End point not entered properly");
                     System.exit(102);
                 }
             }

@@ -15,15 +15,16 @@ public class City {
         CountryMap data = new CountryMap();
         Art textart = new Art();
 
-        data.fileRead(filename + ".txt");
-
+        data.fileRead(filename);
         WayFinder calculate = new WayFinder(data);
+
         if (calculate.allCheck()) {
             System.out.println("Cities and routes checked");
             calculate.shortestWay();
 
             PathResult lastresult = calculate.result;
 
+            //WayFinderdaki sonucu PathResult'a kaydettikten sonra sonucu output.txt'e yazdırmak için
             Formatter f = null;
             try {
                 f = new Formatter("output.txt");

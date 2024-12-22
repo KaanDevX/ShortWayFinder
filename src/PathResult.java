@@ -1,3 +1,6 @@
+//Wayfinder daki değerleri kaydetmek için
+
+
 public class PathResult {
     private String path;
     private int totalTime;

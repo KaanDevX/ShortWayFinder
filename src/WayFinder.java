@@ -5,6 +5,8 @@ public class WayFinder {
         this.data = data;
     }
 
+
+    //başlangıç noktasının verilen şehir isimlerinde olup olmadığına bakar.
     public boolean checkStart(){
         boolean[] result = new boolean[data.numofroutes];
         boolean netresult = true;
@@ -24,6 +26,7 @@ public class WayFinder {
         return netresult;
     }
 
+    //bitiş noktasının verilen şehir isimlerinde olup olmadığına bakar.
     public boolean checkTarget(){
         boolean[] result = new boolean[data.numofroutes];
         boolean netresult = true;
@@ -43,6 +46,7 @@ public class WayFinder {
         return netresult;
     }
 
+    //ilk sütunun tüm satırlarında tek tek şehir isimlerinin verildiği arrayle kontrol eder.
     public boolean checkFirstColumnCities() {
         boolean[] result = new boolean[data.numofroutes];
         boolean netresult = true;
@@ -62,6 +66,7 @@ public class WayFinder {
         return netresult;
     }
 
+    //ikinci sütunun tüm satırlarında tek tek şehir isimlerinin verildiği arrayle kontrol eder.
     public boolean checkSecondColumnCities() {
         boolean[] result = new boolean[data.numofroutes];
         boolean netresult = true;
@@ -81,6 +86,7 @@ public class WayFinder {
         return netresult;
     }
 
+    //ilk sütun, ikinci sütun, başlangıç ve son noktayı kontrol eder.
     public boolean allCheck() {
         if (checkFirstColumnCities() && checkSecondColumnCities() && checkStart() && checkTarget()) {
             return true;
@@ -90,6 +96,7 @@ public class WayFinder {
     }
 
     public void shortestWay() {
+        //findWays fonksiyonunda kullanabilmek için bunlara bir değer vermem gerekti
         int startIndex = findCity(data.start);
         int targetIndex = findCity(data.target);
 
@@ -111,6 +118,7 @@ public class WayFinder {
     //tüm yolları denemek için
     private void findWays(int current, int target, boolean[] visited, String currentway, int currentTime) {
 
+        //Eğer şuanki yol hedefe eşitse ve toplam zaman PathResulta önceden kaydedilen zamandan küçükse yeni değerler ona eşit olur.
         if (current == target) {
             if (currentTime < result.getTotalTime()) {
                 result.setPath(currentway);
